@@ -5,11 +5,17 @@ import axios from "axios";
 // importo lo store per la condivisione di dati
 import { store } from "./store.js";
 
+import AppMain from "./components/AppMain.vue";
+
 export default {
   data() {
     return {
       store,
     }
+  },
+
+  components: {
+    AppMain,
   },
 
   created() {
@@ -26,6 +32,12 @@ export default {
 }
 </script>
 
-<template></template>
+<template>
+  <div>
+
+    <AppMain></AppMain>
+
+  </div>
+</template>
 
 <style lang="scss" scoped></style>
