@@ -1,5 +1,4 @@
 <script>
-
 import "/node_modules/flag-icons/css/flag-icons.min.css"
 
 export default {
@@ -10,13 +9,13 @@ export default {
     },
 
     props: {
-        card: Object,
+        series: Object,
     },
 
     methods: {
-        addFlags(language) {
+        addFlagsSeries(language) {
 
-            language = this.card.original_language;
+            language = this.series.original_language;
 
             if (language == 'en') {
                 language = 'gb';
@@ -38,33 +37,26 @@ export default {
             };
             if (language == 'cs') {
                 language = 'cz';
-            };
+            }
 
             return language;
         },
     },
 }
-
 </script>
 
 <template>
-    <div class="container-card-item">
-        <ul>
-            <li><strong>titolo:</strong> {{ card.title }}</li>
-            <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
-            <li><strong>lingua originale: </strong> {{ card.original_language }}</li>
-            <li><strong>voto: </strong> {{ card.vote_average }}</li>
-            <!-- primo metodo di visualizzazione della bandiera -->
-            <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
-
-            <li><span :class="'fi fi-' + addFlags(card.original_language)"></span></li>
-
-        </ul>
+    <div class="container-series-item">
+        <li><strong>titolo:</strong> {{ series.name }}</li>
+        <li><strong>titolo originale: </strong> {{ series.original_name }}</li>
+        <li><strong>lingua originale: </strong> {{ series.original_language }}</li>
+        <li><strong>voto: </strong> {{ series.vote_average }}</li>
+        <li><span :class="'fi fi-' + addFlagsSeries(series.original_language)"></span></li>
     </div>
 </template>
 
 <style lang="scss" scoped>
-.container-card-item {
+.container-series-item {
     width: 250px;
     border: 1px solid black;
     padding: 3px;

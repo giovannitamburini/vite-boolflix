@@ -32,6 +32,15 @@ export default {
       console.log(this.store.ListMovies);
 
       this.store.loading = false;
+    });
+
+    axios.get(this.store.ApiSeriesCall).then((response) => {
+
+      this.store.ListSeries = response.data.results;
+
+      (console.log(this.store.ListSeries));
+
+      this.store.loadingSeries = false;
     })
   },
 
@@ -40,21 +49,63 @@ export default {
     searchMovieTitle() {
       // console.log(this.store.InputValue);
 
-      this.store.ApiQuery += encodeURIComponent(this.store.InputValue);
+      if (this.store.InputValue.length > 0) {
 
-      let newApiCall = this.store.ApiCallBase + this.store.path + this.store.ApiKey + this.store.ApiQuery;
+        this.store.bestMovies = true;
+        this.store.loading = true;
 
-      console.log(newApiCall);
+        // this.store.ApiQuery += encodeURIComponent(this.store.InputValue);
 
-      axios.get(newApiCall).then((res) => {
+        let newApiCall = this.store.ApiCallBase + this.store.path + this.store.ApiKey + this.store.ApiQuery + encodeURIComponent(this.store.InputValue);
 
-        this.store.ListMovies = res.data.results;
+        console.log(newApiCall);
 
-        this.store.bestMovies = false;
-        this.store.loading = false;
+        axios.get(newApiCall).then((res) => {
+
+          this.store.ListMovies = res.data.results;
+
+          this.store.bestMovies = false;
+          this.store.loading = false;
+
+        });
+
+        this.store.SearchValue = this.store.InputValue;
+
+        // risvuoto il campo di input per compiere una nuova ricerca
+        this.store.InputValue = '';
+
+      }
 
 
-      })
+    },
+
+    searchSeriesTitle() {
+
+      if (this.store.InputSeriesValue.length > 0) {
+
+        this.store.bestSeries = true;
+        this.store.loadingSeries = true;
+
+        let newApiSeriesCall = this.store.ApiCallBase + this.store.pathSeries + this.store.ApiKey + this.store.ApiQuery + encodeURIComponent(this.store.InputSeriesValue);
+
+        console.log(newApiSeriesCall);
+
+        axios.get(newApiSeriesCall).then((response) => {
+
+          this.store.ListSeries = response.data.results;
+
+          this.store.bestSeries = false;
+          this.store.loadingSeries = false;
+        });
+
+        this.store.SearchSeriesValue = this.store.InputSeriesValue;
+
+        // risvuoto il campo di input per compiere una nuova ricerca
+        this.store.InputSeriesValue = '';
+
+      }
+
+
     }
   },
 }
@@ -63,7 +114,7 @@ export default {
 <template>
   <div>
 
-    <AppHeader @search-movie="searchMovieTitle()"></AppHeader>
+    <AppHeader @search-movie="searchMovieTitle() + searchSeriesTitle()"></AppHeader>
 
     <AppMain></AppMain>
 

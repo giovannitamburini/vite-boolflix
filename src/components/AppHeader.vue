@@ -21,7 +21,11 @@ export default {
 
         <strong>searchbar : </strong>
         <!-- collego il valore del campo di input con la variabile InputValue dello store -->
-        <input v-model="store.InputValue" type="text" placeholder="inserisci il nome di un film">
+        <input v-model="store.InputValue" @keyup.enter="$emit('searchMovie')" type="text"
+            placeholder="inserisci il nome di un film">
+
+        <input v-model="store.InputSeriesValue" @keyup.enter="$emit('searchMovie')" type="text"
+            placeholder="inserisci il nome di una serie tv">
 
         <button @click="$emit('searchMovie')">Cerca</button>
 
@@ -33,6 +37,8 @@ export default {
 
     display: flex;
     gap: 5px;
+    padding: 10px;
+    border-bottom: 2px solid black;
 
     input {
         width: 200px;
