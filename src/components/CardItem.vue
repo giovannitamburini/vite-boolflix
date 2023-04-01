@@ -2,6 +2,9 @@
 
 import "/node_modules/flag-icons/css/flag-icons.min.css"
 
+import '@fortawesome/fontawesome-free/css/all.css'
+
+
 export default {
     data() {
         return {
@@ -68,7 +71,8 @@ export default {
             <li><strong>titolo:</strong> {{ card.title }}</li>
             <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
             <li><strong>lingua originale: </strong> {{ card.original_language }}</li>
-            <li><strong>voto: </strong> {{ card.vote_average }}</li>
+            <li><strong>voto: </strong> {{ Math.ceil(card.vote_average / 2) }}</li>
+            <li><span v-for="star in Math.ceil(card.vote_average / 2)"><i class="fa-solid fa-star"></i></span></li>
             <!-- primo metodo di visualizzazione della bandiera -->
             <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
 

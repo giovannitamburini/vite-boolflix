@@ -1,6 +1,8 @@
 <script>
 import "/node_modules/flag-icons/css/flag-icons.min.css"
 
+import '@fortawesome/fontawesome-free/css/all.css'
+
 export default {
     data() {
         return {
@@ -44,6 +46,7 @@ export default {
         },
 
         addSeriesPoster(series) {
+
             let completePosterSeriesLink = this.linkSeriesPoster + series.poster_path;
 
             if (series.poster_path == null) {
@@ -64,7 +67,8 @@ export default {
             <li><strong>titolo:</strong> {{ series.name }}</li>
             <li><strong>titolo originale: </strong> {{ series.original_name }}</li>
             <li><strong>lingua originale: </strong> {{ series.original_language }}</li>
-            <li><strong>voto: </strong> {{ series.vote_average }}</li>
+            <li><strong>voto: </strong> {{ Math.ceil(series.vote_average / 2) }}</li>
+            <li><span v-for="star in Math.ceil(series.vote_average / 2)"><i class="fa-solid fa-star"></i></span></li>
             <li><span :class="'fi fi-' + addFlagsSeries(series.original_language)"></span></li>
         </ul>
     </div>
