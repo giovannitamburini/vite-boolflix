@@ -33,7 +33,7 @@ export default {
 
             <div id="container-card">
                 <!-- creo una props per passare il singolo oggetto movies, dell'array ListMovies, al componente figlio  CardItem -->
-                <CardItem v-for="movie in store.ListMovies" :card="movie"></CardItem>
+                <CardItem v-for="movie in store.ListMovies" :card="movie" :linkPoster="store.linkPosterBase"></CardItem>
             </div>
         </div>
 
@@ -54,7 +54,8 @@ export default {
 
             <div id="container-series">
                 <!-- qui dovrò creare la props come sopra ma per le serie tv -->
-                <CardSeriesItem v-for="series in store.ListSeries" :series="series"></CardSeriesItem>
+                <CardSeriesItem v-for="series in store.ListSeries" :series="series"
+                    :linkSeriesPoster="store.linkPosterBase"></CardSeriesItem>
             </div>
         </div>
 

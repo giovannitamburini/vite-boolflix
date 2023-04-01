@@ -11,6 +11,7 @@ export default {
 
     props: {
         card: Object,
+        linkPoster: String,
     },
 
     methods: {
@@ -42,6 +43,18 @@ export default {
 
             return language;
         },
+
+        addMoviePoster(movie) {
+
+            let completePosterLink = this.linkPoster + movie.poster_path;
+
+            if (movie.poster_path == null) {
+
+                completePosterLink = '../no_poster.jpg';
+            };
+
+            return completePosterLink;
+        }
     },
 }
 
@@ -50,6 +63,8 @@ export default {
 <template>
     <div class="container-card-item">
         <ul>
+            <li><img :src="addMoviePoster(card)" class="movie-poster" alt="movie poster">
+            </li>
             <li><strong>titolo:</strong> {{ card.title }}</li>
             <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
             <li><strong>lingua originale: </strong> {{ card.original_language }}</li>
@@ -65,8 +80,14 @@ export default {
 
 <style lang="scss" scoped>
 .container-card-item {
-    width: 250px;
+    width: 200px;
     border: 1px solid black;
     padding: 3px;
+
+    ul {
+        .movie-poster {
+            width: 100%;
+        }
+    }
 }
 </style>

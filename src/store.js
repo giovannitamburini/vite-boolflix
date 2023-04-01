@@ -55,4 +55,8 @@ export const store = reactive({
 
     SearchSeriesValue: '',
 
+    // POSTER -------------------------
+
+    linkPosterBase: 'https://image.tmdb.org/t/p/w342',
+
 });
