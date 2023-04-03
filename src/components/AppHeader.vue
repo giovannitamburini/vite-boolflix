@@ -119,9 +119,10 @@ export default {
             box-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
 
             &:hover {
-                transform: scale(1.1);
+                color: #ff073a;
                 box-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue;
-
+                background-color: rgba(0, 0, 255, 0.5);
+                transition: 0.5s;
             }
         }
     }

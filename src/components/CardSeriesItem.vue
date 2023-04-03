@@ -97,8 +97,10 @@ export default {
             <!-- <li><span :class="'fi fi-' + updatedLanguage"></span></li> -->
 
             <li>
-                <span v-for="(item, index) in 5" :class="Math.ceil(series.vote_average / 2) > index ? 'star' : ''"><i
+                <span v-show="Math.ceil(series.vote_average / 2)" v-for="(item, index) in 5"
+                    :class="Math.ceil(series.vote_average / 2) > index ? 'star' : ''"><i
                         class="fa-solid fa-star"></i></span>
+                <span v-show="!Math.ceil(series.vote_average / 2)">voto non disponibile</span>
             </li>
         </ul>
     </div>
