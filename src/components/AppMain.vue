@@ -26,7 +26,7 @@ export default {
         </div>
         <div v-else id="container">
             <div v-if="store.bestMovies" class="shadow"><strong>Migliori film della settimana :</strong></div>
-            <div v-if="!store.bestMovies" class="shadow"><strong>risultato per la ricerca: </strong> <em>' {{
+            <div v-if="!store.bestMovies" class="shadow"><strong>film corrispondenti alla ricerca: </strong> <em>' {{
                 store.SearchValue }} '</em>
             </div>
 
@@ -41,7 +41,7 @@ export default {
         </div>
         <div v-else>
             <div v-if="store.bestSeries" class="shadow"><strong>Migliori serie tv della settimana :</strong></div>
-            <div v-if="!store.bestSeries" class="shadow"><strong>risultato per la ricerca: </strong> <em>' {{
+            <div v-if="!store.bestSeries" class="shadow"><strong>serie tv corrispondenti alla ricerca: </strong> <em>' {{
                 store.SearchSeriesValue }}
                     '</em>
             </div>
@@ -52,7 +52,6 @@ export default {
                     :linkSeriesPoster="store.linkPosterBase"></CardSeriesItem>
             </div>
         </div>
-
 
     </div>
 </template>
@@ -82,7 +81,7 @@ export default {
     #container-series {
         display: flex;
         flex-flow: row nowrap;
-        gap: 10px;
+        gap: 8px;
         overflow-x: scroll;
     }
 }

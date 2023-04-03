@@ -97,7 +97,7 @@ export default {
             <!-- <li><span :class="'fi fi-' + updatedLanguage"></span></li> -->
 
             <li>
-                <span v-for="star in Math.ceil(series.vote_average / 2)" class="star"><i
+                <span v-for="(item, index) in 5" :class="Math.ceil(series.vote_average / 2) > index ? 'star' : ''"><i
                         class="fa-solid fa-star"></i></span>
             </li>
         </ul>
@@ -107,7 +107,7 @@ export default {
 <style lang="scss" scoped>
 .container-series-item {
     width: 200px;
-    height: 289px;
+    aspect-ratio: 1/1.45;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -125,7 +125,7 @@ export default {
 
 
     ul {
-        font-size: 0.8em;
+        font-size: 0.9em;
         position: absolute;
         padding: 4px;
 
@@ -136,7 +136,7 @@ export default {
         }
 
         .star {
-            color: yellow;
+            color: rgb(19, 223, 172);
         }
     }
 }

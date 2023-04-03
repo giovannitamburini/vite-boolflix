@@ -20,4 +20,21 @@
   box-sizing: border-box;
 
   list-style-type: none;
+
+}
+
+::-webkit-scrollbar {
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 2px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: 1px solid rgb(19, 223, 172);
+  border-radius: 5px;
 }

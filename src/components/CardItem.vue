@@ -79,33 +79,30 @@ export default {
 <template>
     <div v-on:mouseover="overMovie()" v-on:mouseleave="leaveMovie()" class="container-card-item">
 
-        <div class="container-poster">
+        <img :src="addMoviePoster()" :class="{ hide: hidden }" class="movie-poster" alt="movie-poster">
 
-            <img :src="addMoviePoster()" :class="{ hide: hidden }" class="movie-poster" alt="movie-poster">
+        <ul :class="{ hidetext: hidden }">
+            <li class="movie-title">{{ card.title }}</li>
+            <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
 
-            <ul :class="{ hidetext: hidden }">
-                <li class="movie-title">{{ card.title }}</li>
-                <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
+            <!-- primo metodo di visualizzazione della bandiera -->
+            <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
+            <li><span :class="'fi fi-' + updatedMoviesLanguage"></span></li>
 
-                <!-- primo metodo di visualizzazione della bandiera -->
-                <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
-                <li><span :class="'fi fi-' + updatedMoviesLanguage"></span></li>
+            <li>
+                <span v-for="(item, index) in 5" :class="Math.ceil(card.vote_average / 2) > index ? 'star' : ''">
+                    <i class="fa-solid fa-star"></i>
+                </span>
+            </li>
+        </ul>
 
-                <li>
-                    <span v-for="star in Math.ceil(card.vote_average / 2)" class="star"><i
-                            class="fa-solid fa-star"></i></span>
-                </li>
-
-            </ul>
-
-        </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .container-card-item {
     width: 200px;
-    height: 289px;
+    aspect-ratio: 1/1.45;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -113,38 +110,30 @@ export default {
     flex-shrink: 0;
     border-radius: 5px;
 
-    .container-poster {
-        overflow: hidden;
-        position: relative;
+    .movie-poster {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
         height: 100%;
-
-        .movie-poster {
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        ul {
-            font-size: 0.8em;
-            position: absolute;
-            padding: 4px;
-
-            .movie-title {
-                text-transform: uppercase;
-                color: rgb(19, 223, 172);
-                text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
-
-            }
-
-            .star {
-                color: yellow;
-            }
-        }
-
-
+        overflow: hidden;
     }
+
+    ul {
+        font-size: 0.9em;
+        position: absolute;
+        padding: 4px;
+
+        .movie-title {
+            text-transform: uppercase;
+            color: rgb(19, 223, 172);
+            text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
+        }
+
+        .star {
+            color: rgb(19, 223, 172);
+        }
+    }
+
 
 }
 
