@@ -17,33 +17,39 @@ export default {
         linkPoster: String,
     },
 
-    methods: {
-        addFlags(language) {
+    computed: {
 
-            if (language == 'en') {
-                language = 'gb';
-            };
-            if (language == 'ja') {
-                language = 'jp';
-            };
-            if (language == 'zh') {
-                language = 'cn';
-            };
-            if (language == 'hi') {
-                language = 'in';
-            };
-            if (language == 'ko') {
-                language = 'kr';
-            };
-            if (language == 'he') {
-                language = 'iw';
-            };
-            if (language == 'cs') {
-                language = 'cz';
-            };
+        updatedMoviesLanguage() {
 
-            return language;
+            switch (this.card.original_language) {
+                case 'en':
+                    return 'gb';
+
+                case 'ja':
+                    return 'jp';
+
+                case 'zh':
+                    return 'cn';
+
+                case 'hi':
+                    return 'in';
+
+                case 'ko':
+                    return 'kr';
+
+                case 'he':
+                    return 'iw';
+
+                case 'cs':
+                    return 'cz';
+
+                default:
+                    return this.card.original_language;
+            };
         },
+    },
+
+    methods: {
 
         addMoviePoster() {
 
@@ -77,22 +83,21 @@ export default {
 
             <img :src="addMoviePoster()" :class="{ hide: hidden }" class="movie-poster" alt="movie-poster">
 
-            <div :class="{ hidetext: hidden }" class="movie-description">
-                <ul>
-                    <li><strong>titolo:</strong> {{ card.title }}</li>
-                    <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
-                    <!-- <li><strong>lingua originale: </strong> {{ card.original_language }}</li> -->
-                    <!-- <li><strong>voto: </strong> {{ Math.ceil(card.vote_average / 2) }}</li> -->
-                    <!-- primo metodo di visualizzazione della bandiera -->
-                    <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
-                    <li><span :class="'fi fi-' + addFlags(card.original_language)"></span></li>
+            <ul :class="{ hidetext: hidden }">
+                <li class="movie-title">{{ card.title }}</li>
+                <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
 
-                    <li><span v-for="star in Math.ceil(card.vote_average / 2)" class="star"><i
-                                class="fa-solid fa-star"></i></span>
-                    </li>
+                <!-- primo metodo di visualizzazione della bandiera -->
+                <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
+                <li><span :class="'fi fi-' + updatedMoviesLanguage"></span></li>
 
-                </ul>
-            </div>
+                <li>
+                    <span v-for="star in Math.ceil(card.vote_average / 2)" class="star"><i
+                            class="fa-solid fa-star"></i></span>
+                </li>
+
+            </ul>
+
         </div>
     </div>
 </template>
@@ -100,34 +105,45 @@ export default {
 <style lang="scss" scoped>
 .container-card-item {
     width: 200px;
+    height: 289px;
+    overflow: hidden;
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
     flex-shrink: 0;
+    border-radius: 5px;
 
     .container-poster {
         overflow: hidden;
         position: relative;
-        height: 289px;
+        height: 100%;
 
         .movie-poster {
             position: absolute;
             z-index: 1;
             width: 100%;
+            height: 100%;
             overflow: hidden;
         }
 
-        .movie-description {
+        ul {
+            font-size: 0.8em;
             position: absolute;
-            padding: 3px;
+            padding: 4px;
 
-            ul {
-                font-size: 0.8em;
+            .movie-title {
+                text-transform: uppercase;
+                color: rgb(19, 223, 172);
+                text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
 
-                .star {
-                    color: yellow;
-                }
+            }
+
+            .star {
+                color: yellow;
             }
         }
+
+
     }
 
 }

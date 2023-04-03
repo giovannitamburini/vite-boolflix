@@ -82,6 +82,7 @@ export default {
 
             &:hover {
                 @include overShadow();
+                background-color: rgba(0, 0, 255, 0.5);
             }
         }
 
@@ -91,6 +92,12 @@ export default {
 
             &:hover {
                 @include overShadow();
+                background-color: rgba(0, 0, 255, 0.5);
+            }
+
+            &:focus {
+                outline: none;
+                background-color: rgba(0, 0, 255, 0.5);
             }
         }
     }
