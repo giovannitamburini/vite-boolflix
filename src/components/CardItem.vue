@@ -100,6 +100,9 @@ export default {
 <style lang="scss" scoped>
 .container-card-item {
     width: 200px;
+    display: flex;
+    flex-flow: column nowrap;
+    flex-shrink: 0;
 
     .container-poster {
         overflow: hidden;

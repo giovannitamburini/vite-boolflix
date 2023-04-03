@@ -17,29 +17,47 @@ export default {
 </script>
 
 <template>
-    <div id="search">
+    <div id="header">
 
         <h1>Boolflix</h1>
         <!-- collego il valore del campo di input con la variabile InputValue dello store -->
-        <input v-model="store.InputValue" @keyup.enter="$emit('searchMovie')" type="text"
-            placeholder="inserisci il nome di un film">
 
-        <input v-model="store.InputSeriesValue" @keyup.enter="$emit('searchMovie')" type="text"
-            placeholder="inserisci il nome di una serie tv">
+        <div id="search">
+            <input v-model="store.InputValue" @keyup.enter="$emit('searchMovie')" type="text"
+                placeholder="cerca un film o una serie tv">
 
-        <button @click="$emit('searchMovie')">Cerca</button>
+            <button @click="$emit('searchMovie')">Cerca</button>
+        </div>
 
     </div>
 </template>
 
 <style lang="scss" scoped>
-#search {
+@mixin shadow() {
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: 2px solid rgb(19, 223, 172);
+    box-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
+}
 
+@mixin overShadow() {
+    box-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue;
+    transition: 0.5s;
+}
+
+#header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 5px;
     padding: 10px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(19, 223, 172);
+    box-shadow: 0px 3px 0 blue, 0px 5px 0 rgb(170, 76, 173);
+
+    &:hover {
+        @include overShadow()
+    }
+
 
     h1 {
         letter-spacing: 2px;
@@ -54,8 +72,28 @@ export default {
         }
     }
 
-    input {
-        width: 200px;
+    #search {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+
+        button {
+            @include shadow();
+
+            &:hover {
+                @include overShadow();
+            }
+        }
+
+        input {
+            width: 200px;
+            @include shadow();
+
+            &:hover {
+                @include overShadow();
+            }
+        }
     }
+
 }
 </style>

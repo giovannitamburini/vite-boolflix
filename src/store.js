@@ -48,7 +48,7 @@ export const store = reactive({
     // +
     //ApiQuery
     // +
-    InputSeriesValue: '',
+    // InputValue: '',
 
     // creo un array vuoto in cui inserirò l'output della API call per le serie tv
     ListSeries: [],

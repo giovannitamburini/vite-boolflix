@@ -45,6 +45,14 @@ export default {
   },
 
   methods: {
+
+    search() {
+      this.searchMovieTitle();
+      this.searchSeriesTitle();
+
+      this.store.InputValue = '';
+    },
+
     //meglio chiamarlo con un nome che descriva quello che fa: searchMovieTitle
     searchMovieTitle() {
       // console.log(this.store.InputValue);
@@ -72,7 +80,7 @@ export default {
         this.store.SearchValue = this.store.InputValue;
 
         // risvuoto il campo di input per compiere una nuova ricerca
-        this.store.InputValue = '';
+        // this.store.InputValue = '';
 
       }
 
@@ -81,12 +89,12 @@ export default {
 
     searchSeriesTitle() {
 
-      if (this.store.InputSeriesValue.length > 0) {
+      if (this.store.InputValue.length > 0) {
 
         this.store.bestSeries = true;
         this.store.loadingSeries = true;
 
-        let newApiSeriesCall = this.store.ApiCallBase + this.store.pathSeries + this.store.ApiKey + this.store.ApiQuery + encodeURIComponent(this.store.InputSeriesValue);
+        let newApiSeriesCall = this.store.ApiCallBase + this.store.pathSeries + this.store.ApiKey + this.store.ApiQuery + encodeURIComponent(this.store.InputValue);
 
         console.log(newApiSeriesCall);
 
@@ -98,10 +106,7 @@ export default {
           this.store.loadingSeries = false;
         });
 
-        this.store.SearchSeriesValue = this.store.InputSeriesValue;
-
-        // risvuoto il campo di input per compiere una nuova ricerca
-        this.store.InputSeriesValue = '';
+        this.store.SearchSeriesValue = this.store.InputValue;
 
       }
 
@@ -114,7 +119,7 @@ export default {
 <template>
   <div>
 
-    <AppHeader @search-movie="searchMovieTitle() + searchSeriesTitle()"></AppHeader>
+    <AppHeader @search-movie="search()"></AppHeader>
 
     <AppMain></AppMain>
 
