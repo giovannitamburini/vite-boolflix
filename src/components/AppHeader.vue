@@ -66,14 +66,13 @@ export default {
     h1 {
         letter-spacing: 2px;
         text-transform: uppercase;
-        font-size: 3em;
+        font-size: 3.5em;
         color: rgb(19, 223, 172);
         text-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
 
         &:hover {
-            text-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue;
             transition: 0.5s;
-            text-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173), 0 0 20px rgba(7, 62, 242, 0.893);
+            text-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue, 0 0 20px rgb(19, 223, 172);
         }
     }
 
@@ -82,30 +81,35 @@ export default {
         align-items: center;
         gap: 8px;
 
-        button {
-            @include shadow();
-            color: #a0a0a0;
-
-            &:hover {
-                @include overShadow();
-                background-color: rgba(0, 0, 255, 0.5);
-            }
-        }
-
         input {
-            width: 200px;
             @include shadow();
+            width: 250px;
+            padding: 0.8em;
 
             &:hover {
                 @include overShadow();
                 background-color: rgba(0, 0, 255, 0.5);
+                font-size: 1em;
             }
 
             &:focus {
                 outline: none;
                 background-color: rgba(0, 0, 255, 0.5);
+                font-size: 1em;
             }
         }
+
+        button {
+            @include shadow();
+            color: #a0a0a0;
+            font-size: 1em;
+
+            &:hover {
+                @include overShadow();
+                background-color: #ffff00;
+            }
+        }
+
 
         #profile {
             display: flex;

@@ -127,7 +127,6 @@ export default {
 
 
     ul {
-        font-size: 0.9em;
         position: absolute;
         padding: 4px;
 
@@ -145,7 +144,7 @@ export default {
 
 .hide {
     transform: scale(1.1);
-    opacity: 0.2;
+    opacity: 0.15;
     transition: 0.5s;
 }
 

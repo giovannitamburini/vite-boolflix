@@ -111,7 +111,29 @@ export default {
       }
 
 
-    }
+    },
+
+    scrollLeftMovies() {
+
+      let leftMovies = document.querySelector('#container-movies');
+      leftMovies.scrollBy(-208, 0);
+    },
+
+    scrollRigthMovies() {
+      let rightMovies = document.querySelector('#container-movies');
+      rightMovies.scrollBy(208, 0);
+    },
+
+    scrollLeftSeries() {
+      let leftSeries = document.querySelector('#container-series');
+      leftSeries.scrollBy(-208, 0);
+    },
+
+    scrollRigthSeries() {
+      let rightSeries = document.querySelector('#container-series');
+      rightSeries.scrollBy(208, 0);
+    },
+
   },
 }
 </script>
@@ -121,7 +143,8 @@ export default {
 
     <AppHeader @search-movie="search()"></AppHeader>
 
-    <AppMain></AppMain>
+    <AppMain @scroll-l-movies="scrollLeftMovies()" @scroll-r-movies="scrollRigthMovies()"
+      @scroll-l-series="scrollLeftSeries()" @scroll-r-series="scrollRigthSeries()"></AppMain>
 
   </div>
 </template>
