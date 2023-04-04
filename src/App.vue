@@ -51,6 +51,7 @@ export default {
       this.searchSeriesTitle();
 
       this.store.InputValue = '';
+      this.store.creditsShow = false;
     },
 
     //meglio chiamarlo con un nome che descriva quello che fa: searchMovieTitle
@@ -78,10 +79,6 @@ export default {
         });
 
         this.store.SearchValue = this.store.InputValue;
-
-        // risvuoto il campo di input per compiere una nuova ricerca
-        // this.store.InputValue = '';
-
       }
 
 
@@ -107,7 +104,6 @@ export default {
         });
 
         this.store.SearchSeriesValue = this.store.InputValue;
-
       }
 
 

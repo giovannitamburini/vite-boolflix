@@ -24,10 +24,10 @@ export default {
     <div v-show="store.creditsShow" id="jumbotron">
         <img :src="store.JumboLinkImage" alt="">
         <div id="description">
-            <div><strong>{{ store.JumboTitle }}</strong> </div>
+            <div class="smalltitle"><strong>{{ store.JumboTitle }}</strong> </div>
 
             <div id="genre-section">
-                <div>cast:</div>
+                <div class="smalltitle">genere:</div>
                 <div id="genre">
                     <div v-for="genre in store.ListGenre">
                         <span v-for="genreid in store.JumboGenreId" v-show="genre.id == genreid">{{ genre.name }}, </span>
@@ -35,10 +35,10 @@ export default {
                 </div>
             </div>
             <div id="cast">
-                <div>cast:</div>
+                <div class="smalltitle">cast:</div>
                 <div v-for="credit in subListCreditsM"> {{ credit.name }}, </div>
             </div>
-            <div>trama: {{ store.JumboOverview }}</div>
+            <div> <span class="smalltitle">trama:</span> trama: {{ store.JumboOverview }}</div>
         </div>
     </div>
 </template>
@@ -55,6 +55,9 @@ export default {
 
     img {
         height: 100%;
+        border-radius: 10px;
+        color: rgb(19, 223, 172);
+        box-shadow: 1.5px 2px 0 rgb(19, 223, 172), 3px 4px 0 blue, 4.5px 6px 0 rgb(170, 76, 173);
     }
 
     #description {
@@ -75,5 +78,11 @@ export default {
             gap: 3px;
         }
     }
+}
+
+.smalltitle {
+    text-transform: uppercase;
+    color: rgb(19, 223, 172);
+    text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
 }
 </style>

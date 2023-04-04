@@ -13,6 +13,7 @@ export default {
     },
 
     props: {
+
         series: Object,
         linkSeriesPoster: String,
     },
@@ -124,7 +125,6 @@ export default {
         height: 100%;
         overflow: hidden;
     }
-
 
     ul {
         position: absolute;

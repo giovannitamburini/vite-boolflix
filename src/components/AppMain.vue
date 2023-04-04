@@ -45,7 +45,11 @@ export default {
         showJumbo(category) {
 
             this.store.idCategory = category.id;
-            this.store.JumboLinkImage = this.store.linkPosterBase + category.poster_path;
+            if (category.poster_path == null) {
+                this.store.JumboLinkImage = '../no_poster.jpg';
+            } else {
+                this.store.JumboLinkImage = this.store.linkPosterBase + category.poster_path;
+            }
             this.store.JumboOverview = category.overview;
             this.store.JumboGenreId = category.genre_ids;
 
@@ -213,7 +217,6 @@ export default {
                 text-shadow: 0.5px 1px 0 rgb(170, 76, 173), 1px 2px 0 blue;
             }
         }
-
 
         #container-movies,
         #container-series {

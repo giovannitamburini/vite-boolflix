@@ -86,8 +86,6 @@ export const store = reactive({
 
     creditsShow: false,
 
-
-
     ApiGenreCall: 'https://api.themoviedb.org/3/genre/movie/list?api_key=c3c804e9852eacc93d32f48f228a0f79',
     ListGenre: [],
 
