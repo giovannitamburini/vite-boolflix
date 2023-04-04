@@ -59,4 +59,37 @@ export const store = reactive({
 
     linkPosterBase: 'https://image.tmdb.org/t/p/w342',
 
+
+    // ApiMovieCredits: 'https://api.themoviedb.org/3/movie/603692/credits?api_key=c3c804e9852eacc93d32f48f228a0f79',
+
+    // ApiMovieCreditsModular: ApiCallBase + pathMovieCredits + idMovie + pathCredits + ApiKey,
+
+    pathCreditsM: '/movie/',
+
+    pathCreditsS: '/tv/',
+
+    idCategory: '',
+
+    JumboLinkImage: '',
+
+    JumboTitle: '',
+
+    JumboOverview: '',
+
+    JumboGenreId: [],
+
+    pathCredits: '/credits',
+
+    ListCredits: [],
+
+
+
+    creditsShow: false,
+
+
+
+    ApiGenreCall: 'https://api.themoviedb.org/3/genre/movie/list?api_key=c3c804e9852eacc93d32f48f228a0f79',
+    ListGenre: [],
+
+
 });

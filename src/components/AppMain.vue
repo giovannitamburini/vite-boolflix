@@ -6,17 +6,22 @@ import { store } from "../store.js";
 
 import CardItem from "./CardItem.vue";
 import CardSeriesItem from "./CardSeriesItem.vue";
+import JumboItem from "./JumboItem.vue";
+import axios from 'axios';
 
 export default {
     data() {
         return {
             store,
+
+            insideMovies: Boolean,
         }
     },
 
     components: {
         CardItem,
         CardSeriesItem,
+        JumboItem,
     },
 
     emits: [
@@ -25,15 +30,82 @@ export default {
         'scrollLSeries',
         'scrollRSeries',
     ],
+
+    created() {
+        axios.get(this.store.ApiGenreCall).then((res) => {
+
+            this.store.ListGenre = res.data.genres;
+
+            console.log(this.store.ListGenre);
+        });
+    },
+
+    methods: {
+
+        showJumbo(category) {
+
+            this.store.idCategory = category.id;
+            this.store.JumboLinkImage = this.store.linkPosterBase + category.poster_path;
+            this.store.JumboOverview = category.overview;
+            this.store.JumboGenreId = category.genre_ids;
+
+            if (this.insideMovies) {
+
+                this.store.JumboTitle = category.title;
+
+                let jumboApiCall = this.store.ApiCallBase + this.store.pathCreditsM + this.store.idCategory + this.store.pathCredits + this.store.ApiKey;
+                axios.get(jumboApiCall).then((res) => {
+
+                    this.store.ListCredits = res.data.cast;
+
+                    console.log(this.store.ListCredits);
+                });
+            };
+
+            if (!this.insideMovies) {
+
+                this.store.JumboTitle = category.name;
+
+                let jumboApiCall = this.store.ApiCallBase + this.store.pathCreditsS + this.store.idCategory + this.store.pathCredits + this.store.ApiKey;
+
+                axios.get(jumboApiCall).then((res) => {
+
+                    this.store.ListCredits = res.data.cast;
+
+                    console.log(this.store.ListCredits);
+                });
+            };
+
+            this.store.creditsShow = true;
+
+            this.scroll();
+        },
+
+        scroll() {
+            const showJumbo = document.getElementById('jumbotron');
+            showJumbo.scrollIntoView({ behavior: 'smooth' });
+        },
+
+        selectMovie() {
+            this.insideMovies = true;
+        },
+
+        selectSeries() {
+            this.insideMovies = false;
+        },
+    },
 }
 </script>
 
 <template>
     <div id="main">
+
         <div v-if="store.loading">
             caricamento film
         </div>
         <div v-else class="container">
+            <JumboItem></JumboItem>
+
             <div v-if="store.bestMovies" class="shadow"><strong>Migliori film della settimana :</strong></div>
             <div v-if="!store.bestMovies" class="shadow"><strong>film corrispondenti alla ricerca: </strong> <em>' {{
                 store.SearchValue }} '</em>
@@ -45,12 +117,13 @@ export default {
                 </button>
                 <div id="container-movies">
                     <!-- creo una props per passare il singolo oggetto movies, dell'array ListMovies, al componente figlio  CardItem -->
-                    <CardItem v-for="movie in store.ListMovies" :card="movie" :linkPoster="store.linkPosterBase"></CardItem>
+                    <CardItem v-for="movie in store.ListMovies" @click="selectMovie() + showJumbo(movie)" :card="movie"
+                        :linkPoster="store.linkPosterBase">
+                    </CardItem>
                 </div>
                 <button @click="$emit('scrollRMovies')" class="btn-end">
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
-
             </div>
         </div>
 
@@ -68,8 +141,8 @@ export default {
                 </button>
                 <div id="container-series">
                     <!-- qui dovrò creare la props come sopra ma per le serie tv -->
-                    <CardSeriesItem v-for="series in store.ListSeries" :series="series"
-                        :linkSeriesPoster="store.linkPosterBase"></CardSeriesItem>
+                    <CardSeriesItem v-for="series in store.ListSeries" @click="selectSeries() + showJumbo(series)"
+                        :series="series" :linkSeriesPoster="store.linkPosterBase"></CardSeriesItem>
                 </div>
                 <button @click="$emit('scrollRSeries')" class="btn-end">
                     <i class="fa-solid fa-arrow-right"></i>
@@ -154,27 +227,4 @@ export default {
     }
 
 }
-
-// CODICE OPZIONALE PER AGGIUNGERE L'EFFETTO SFUMATO AI LATI DEL CONTENITORE IN CUI SCORRONO LE CARTE
-// &::after {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     z-index: 3;
-//     height: 100%;
-//     width: 10%;
-//     background-image: linear-gradient(90deg, #242424, transparent);
-// }
-
-// &::before {
-//     content: '';
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     z-index: 3;
-//     height: 100%;
-//     width: 10%;
-//     background-image: linear-gradient(90deg, #242424, transparent);
-// }
 </style>
