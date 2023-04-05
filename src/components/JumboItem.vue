@@ -2,7 +2,6 @@
 
 import { store } from "../store.js";
 
-
 export default {
     data() {
         return {
@@ -11,34 +10,48 @@ export default {
     },
 
     computed: {
+
+        // funzione per prendere solo i primi 5 attori contenuti nel cast del film/serie tv selezionata
         subListCreditsM() {
 
             return this.store.ListCredits.slice(0, 5);
         },
-
     },
 }
 </script>
 
 <template>
-    <div v-show="store.creditsShow" id="jumbotron">
+    <!-- visualizzabile se  è stata cliccato un film o una serie tv-->
+    <div v-show="store.JumboShow" id="jumbotron">
+        <!-- link immagine uguale a link del poster del film/serie tv selezionata -->
         <img :src="store.JumboLinkImage" alt="">
-        <div id="description">
-            <div class="smalltitle"><strong>{{ store.JumboTitle }}</strong> </div>
 
+        <div id="description">
+            <!-- titolo film/serie selezionata -->
+            <div class="smalltitle"><strong>{{ store.JumboTitle }}</strong> </div>
+            <!-- generi del film/serie selezionata -->
             <div id="genre-section">
+
                 <div class="smalltitle">genere:</div>
+
                 <div id="genre">
+                    <!-- ciclo per ogni genere contenuto nella lista completa dei generi -->
                     <div v-for="genre in store.ListGenre">
+                        <!-- ciclo per ogni id contenuto nell'array dei generi del singolo film/serie selezionata -->
+                        <!-- visualizzo la proprietà name della lista dei generi solo se la proprietà id del singolo genere corrisponde all'id del genere del film/serie tv selezionata -->
                         <span v-for="genreid in store.JumboGenreId" v-show="genre.id == genreid">{{ genre.name }}, </span>
                     </div>
                 </div>
             </div>
+
             <div id="cast">
                 <div class="smalltitle">cast:</div>
+                <!-- ciclo per ogni elemento contenuto in subListCreditsM -->
                 <div v-for="credit in subListCreditsM"> {{ credit.name }}, </div>
             </div>
-            <div> <span class="smalltitle">trama:</span> trama: {{ store.JumboOverview }}</div>
+
+            <!-- trama del singolo film/serie selezionata -->
+            <div> <span class="smalltitle">trama:</span> {{ store.JumboOverview }}</div>
         </div>
     </div>
 </template>

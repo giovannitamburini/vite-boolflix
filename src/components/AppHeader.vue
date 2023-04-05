@@ -1,6 +1,7 @@
 <script>
+// importo font awesome
 import '@fortawesome/fontawesome-free/css/all.css'
-
+// importo lo store
 import { store } from "../store.js";
 
 export default {
@@ -12,7 +13,7 @@ export default {
 
     // best practice: per collegare meglio i suggerimenti di vs code e  per evitare eventuali bug
     emits: [
-        'searchMovie',
+        'search',
     ],
 }
 </script>
@@ -21,14 +22,15 @@ export default {
     <div id="header">
 
         <h1>Boolflix</h1>
-        <!-- collego il valore del campo di input con la variabile InputValue dello store -->
 
         <div id="search">
-            <input v-model="store.InputValue" @keyup.enter="$emit('searchMovie')" type="text"
+            <!-- collego il valore del campo di input con la variabile InputValue dello store -->
+            <!-- alla pressione del tasto enter si attiva la funzione 'search' passata dall'Appvue tramite emit -->
+            <input v-model="store.InputValue" @keyup.enter="$emit('search')" type="text"
                 placeholder="cerca un film o una serie tv">
-
-            <button @click="$emit('searchMovie')">Cerca</button>
-
+            <!-- alla click del bottone si attiva la funzione search per effettuare la ricerca passata dall Appvue tramite emit -->
+            <button @click="$emit('search')">Cerca</button>
+            <!-- icona del profilo -->
             <div id="profile"><i class="fa-regular fa-user"></i></div>
         </div>
 

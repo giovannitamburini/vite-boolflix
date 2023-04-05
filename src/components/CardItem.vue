@@ -18,7 +18,7 @@ export default {
     },
 
     computed: {
-
+        // funzione per correggere il mismatch tra la sigla della nazionalità del film e quella delle bandiere
         updatedMoviesLanguage() {
 
             switch (this.card.original_language) {
@@ -47,14 +47,13 @@ export default {
                     return this.card.original_language;
             };
         },
-    },
 
-    methods: {
-
+        // funzione per aggiungere la locandina del film
         addMoviePoster() {
 
             let completePosterLink = this.linkPoster + this.card.poster_path;
 
+            // gestisco il caso in cui il film non ha una locandina
             if (this.card.poster_path == null) {
 
                 completePosterLink = '../no_poster.jpg';
@@ -63,6 +62,11 @@ export default {
             return completePosterLink;
         },
 
+    },
+
+    methods: {
+
+        // funzioni per gestire il mouse hover sulla singola card del film, per mostrare la descrizione in sovraimpressione
         overMovie() {
             this.hidden = true;
         },
@@ -70,30 +74,37 @@ export default {
         leaveMovie() {
             this.hidden = false;
         },
-
     },
 }
 
 </script>
 
 <template>
+    <!-- passando sopra col mouse e uscendo dall'area della card si attivano rispettivamente la funzione overMovie e leaveMovie -->
     <div v-on:mouseover="overMovie()" v-on:mouseleave="leaveMovie()" class="container-card-item">
 
-        <img :src="addMoviePoster()" :class="{ hide: hidden }" class="movie-poster" alt="movie-poster">
+        <!-- src uguale al return della funzione addMoviePoster. classe attribuita solo se hidden è uguale a true -->
+        <img :src="addMoviePoster" :class="{ hide: hidden }" class="movie-poster" alt="movie-poster">
 
+        <!-- descrizione film visibile (cambia lo z-index) solo se hidden è true -->
         <ul :class="{ hidetext: hidden }">
+
             <li class="movie-title">{{ card.title }}</li>
+
             <li><strong>titolo originale: </strong> {{ card.original_title }}</li>
 
-            <!-- primo metodo di visualizzazione della bandiera -->
-            <!-- <li><span :class="'fi fi-' + card.original_language"></span></li> -->
+            <!-- classe fi fi- + la lingua risultante ha lo scopo di trasformare la sigla del paase nella relativa bandiera -->
             <li><span :class="'fi fi-' + updatedMoviesLanguage"></span></li>
 
             <li>
+                <!-- visualizzabile solo se è disponibile il voto -->
+                <!-- ciclo per 5 volte, cioè per il range di voto che voglio e gli attribuisco la classe per colorare la stellina solo se il voto è maggiore all'indice del v-for -->
                 <span v-show="Math.ceil(card.vote_average / 2)" v-for="(item, index) in 5"
                     :class="Math.ceil(card.vote_average / 2) > index ? 'star' : ''">
                     <i class="fa-solid fa-star"></i>
                 </span>
+
+                <!-- visualizzabile se non è disponibile un voto -->
                 <span v-show="!Math.ceil(card.vote_average / 2)">voto non disponibile</span>
             </li>
         </ul>

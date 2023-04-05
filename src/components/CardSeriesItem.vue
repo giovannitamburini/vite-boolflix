@@ -19,6 +19,8 @@ export default {
     },
 
     computed: {
+
+        // funzione per correggere il mismatch tra la sigla della nazionalità delle serie e quella delle bandiere
         updatedLanguage() {
 
             // metodo alternativo di Gabriel
@@ -55,23 +57,26 @@ export default {
                 default:
                     return this.series.original_language;
             };
-        }
-    },
+        },
 
-    methods: {
+        // funzione per aggiungere la locandina della serie
+        addSeriesPoster() {
 
-        addSeriesPoster(series) {
+            let completePosterSeriesLink = this.linkSeriesPoster + this.series.poster_path;
 
-            let completePosterSeriesLink = this.linkSeriesPoster + series.poster_path;
-
-            if (series.poster_path == null) {
+            // gstisco il caso in cui la serie non ha la locandina
+            if (this.series.poster_path == null) {
 
                 completePosterSeriesLink = '../no_poster.jpg';
             };
 
             return completePosterSeriesLink;
         },
+    },
 
+    methods: {
+
+        // funzioni per gestire il mouse hover sulla singola card della serie, per mostrare la descrizione in sovraimpressione
         overSeries() {
             this.hidden = true;
         },
@@ -85,22 +90,31 @@ export default {
 </script>
 
 <template>
+    <!-- passando sopra col mouse e uscendo dall'area della card si attivano rispettivamente la funzione overSeries e leaveSeries -->
     <div v-on:mouseover="overSeries()" v-on:mouseleave="leaveSeries()" class="container-series-item">
-        <img :src="addSeriesPoster(series)" :class="{ hide: hidden }" class="series-poster" alt="series poster">
 
+        <!-- src uguale al return della funzione addSeriesPoster. classe attribuita solo se hidden è uguale a true -->
+        <img :src="addSeriesPoster" :class="{ hide: hidden }" class="series-poster" alt="series poster">
+
+        <!-- descrizione serie visibile (cambia lo z-index) solo se hidden è true -->
         <ul :class="{ hidetext: hidden }">
+
             <li class="series-title">{{ series.name }}</li>
+
             <li><strong>titolo originale: </strong> {{ series.original_name }}</li>
-            <!-- <li><strong>lingua originale: </strong> {{ series.original_language }}</li> -->
+
+            <!-- classe fi fi- + la lingua risultante ha lo scopo di trasformare la sigla del paase nella relativa bandiera -->
             <li><span :class="'fi fi-' + updatedLanguage"></span></li>
 
-            <!-- correzzzione gabri -->
-            <!-- <li><span :class="'fi fi-' + updatedLanguage"></span></li> -->
-
             <li>
+                <!-- visualizzabile solo se è disponibile il voto -->
+                <!-- ciclo per 5 volte, cioè per il range di voto che voglio e gli attribuisco la classe per colorare la stellina solo se il voto è maggiore all'indice del v-for -->
                 <span v-show="Math.ceil(series.vote_average / 2)" v-for="(item, index) in 5"
-                    :class="Math.ceil(series.vote_average / 2) > index ? 'star' : ''"><i
-                        class="fa-solid fa-star"></i></span>
+                    :class="Math.ceil(series.vote_average / 2) > index ? 'star' : ''">
+                    <i class="fa-solid fa-star"></i>
+                </span>
+
+                <!-- visualizzabile se non è disponibile un voto -->
                 <span v-show="!Math.ceil(series.vote_average / 2)">voto non disponibile</span>
             </li>
         </ul>
