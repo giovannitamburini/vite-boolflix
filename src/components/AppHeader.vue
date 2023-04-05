@@ -38,16 +38,20 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+$sky: rgb(19, 223, 172);
+$purple: rgb(170, 76, 173);
+$darkblue: rgba(0, 0, 255, 0.5);
+
 @mixin shadow() {
     padding: 5px 8px;
     border-radius: 8px;
-    border: 2px solid rgb(19, 223, 172);
-    box-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
+    border: 2px solid $sky;
+    box-shadow: 1.5px 3px 0 blue, 3px 5px 0 $purple;
     background-color: transparent;
 }
 
 @mixin overShadow() {
-    box-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue;
+    box-shadow: 1.5px 3px 0 $purple, 3px 5px 0 blue;
     transition: 0.5s;
 }
 
@@ -57,8 +61,8 @@ export default {
     align-items: center;
     flex-flow: row wrap;
     padding: 10px 20px 10px 10px;
-    border-bottom: 2px solid rgb(19, 223, 172);
-    box-shadow: 0px 3px 0 blue, 0px 5px 0 rgb(170, 76, 173);
+    border-bottom: 2px solid $sky;
+    box-shadow: 0px 3px 0 blue, 0px 5px 0 $purple;
 
     &:hover {
         @include overShadow()
@@ -68,13 +72,13 @@ export default {
     h1 {
         letter-spacing: 2px;
         text-transform: uppercase;
-        font-size: 3.5em;
-        color: rgb(19, 223, 172);
-        text-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
+        font-size: 4em;
+        color: $sky;
+        text-shadow: 1.5px 3px 0 blue, 3px 5px 0 $purple;
 
         &:hover {
             transition: 0.5s;
-            text-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue, 0 0 20px rgb(19, 223, 172);
+            text-shadow: 1.5px 3px 0 $purple, 3px 5px 0 blue, 0 0 20px $sky;
         }
     }
 
@@ -90,13 +94,13 @@ export default {
 
             &:hover {
                 @include overShadow();
-                background-color: rgba(0, 0, 255, 0.5);
+                background-color: $darkblue;
                 font-size: 1em;
             }
 
             &:focus {
                 outline: none;
-                background-color: rgba(0, 0, 255, 0.5);
+                background-color: $darkblue;
                 font-size: 1em;
             }
         }
@@ -119,15 +123,15 @@ export default {
             align-items: center;
             width: 40px;
             aspect-ratio: 1/1;
-            border: 3px solid rgb(19, 223, 172);
+            border: 3px solid $sky;
             color: #ffff00;
             border-radius: 50%;
-            box-shadow: 1.5px 3px 0 blue, 3px 5px 0 rgb(170, 76, 173);
+            box-shadow: 1.5px 3px 0 blue, 3px 5px 0 $purple;
 
             &:hover {
                 color: #ff073a;
-                box-shadow: 1.5px 3px 0 rgb(170, 76, 173), 3px 5px 0 blue;
-                background-color: rgba(0, 0, 255, 0.5);
+                box-shadow: 1.5px 3px 0 $purple, 3px 5px 0 blue;
+                background-color: $darkblue;
                 transition: 0.5s;
             }
         }

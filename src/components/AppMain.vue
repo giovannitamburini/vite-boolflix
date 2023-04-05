@@ -209,10 +209,31 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+$sky: rgb(19, 223, 172);
+$purple: rgb(170, 76, 173);
+
 @mixin textShadow() {
     text-transform: uppercase;
-    color: rgb(19, 223, 172);
-    text-shadow: 1px 1.5px 0 blue, 2px 3px 0 rgb(170, 76, 173);
+    font-size: 1.5em;
+    color: $sky;
+    text-shadow: 1px 1px 0 blue, 2px 2px 0 $purple;
+}
+
+@mixin arrow() {
+    position: absolute;
+    top: 50%;
+    z-index: 4;
+    transform: translateY(-50%);
+    border: 0;
+    background-color: transparent;
+    font-size: 2em;
+    color: $purple;
+    text-shadow: 1px 1.5px 0 blue, 2px 3px 0 $sky;
+    cursor: pointer;
+
+    &:hover {
+        text-shadow: 0.5px 1px 0 $sky, 1px 2px 0 blue;
+    }
 }
 
 #main {
@@ -220,8 +241,8 @@ export default {
 
     .container {
         padding-bottom: 30px;
-        border-bottom: 2px solid rgb(19, 223, 172);
-        box-shadow: 0 3px 0 blue, 0 5px 0 rgb(170, 76, 173);
+        border-bottom: 2px solid $purple;
+        box-shadow: 0 3px 0 blue, 0 5px 0 $sky;
     }
 
     .shadow {
@@ -233,39 +254,13 @@ export default {
         position: relative;
 
         .btn-start {
-            position: absolute;
-            z-index: 4;
+            @include arrow();
             left: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 0;
-            background-color: transparent;
-            font-size: 2em;
-            color: rgb(19, 223, 172);
-            text-shadow: 1px 1.5px 0 blue, 2px 3px 0 rgb(170, 76, 173);
-            cursor: pointer;
-
-            &:hover {
-                text-shadow: 0.5px 1px 0 rgb(170, 76, 173), 1px 2px 0 blue;
-            }
         }
 
         .btn-end {
-            position: absolute;
-            z-index: 4;
+            @include arrow();
             right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: 0;
-            background-color: transparent;
-            font-size: 2em;
-            color: rgb(19, 223, 172);
-            text-shadow: 1px 1.5px 0 blue, 2px 3px 0 rgb(170, 76, 173);
-            cursor: pointer;
-
-            &:hover {
-                text-shadow: 0.5px 1px 0 rgb(170, 76, 173), 1px 2px 0 blue;
-            }
         }
 
         #container-movies,

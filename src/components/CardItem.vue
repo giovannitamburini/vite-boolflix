@@ -113,6 +113,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+$sky: rgb(19, 223, 172);
+$purple: rgb(170, 76, 173);
+
 .container-card-item {
     width: 200px;
     aspect-ratio: 1/1.45;
@@ -133,16 +136,17 @@ export default {
 
     ul {
         position: absolute;
+        font-size: 1.2em;
         padding: 4px;
 
         .movie-title {
             text-transform: uppercase;
-            color: rgb(19, 223, 172);
-            text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
+            color: $sky;
+            text-shadow: 1px 1px 0 blue, 2px 1px 0 $purple;
         }
 
         .star {
-            color: rgb(19, 223, 172);
+            color: $sky;
         }
     }
 

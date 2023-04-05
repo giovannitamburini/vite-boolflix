@@ -22,13 +22,14 @@ export default {
 
 <template>
     <!-- visualizzabile se  è stata cliccato un film o una serie tv-->
+    <!-- interpolazione del background-image -> :style="{ backgroundImage: 'url(' + store.JumboLinkImage + ')' }" -->
     <div v-show="store.JumboShow" id="jumbotron">
         <!-- link immagine uguale a link del poster del film/serie tv selezionata -->
         <img :src="store.JumboLinkImage" alt="">
 
         <div id="description">
             <!-- titolo film/serie selezionata -->
-            <div class="smalltitle"><strong>{{ store.JumboTitle }}</strong> </div>
+            <div id="jumbo-title" class="smalltitle"><strong>{{ store.JumboTitle }}</strong> </div>
             <!-- generi del film/serie selezionata -->
             <div id="genre-section">
 
@@ -57,6 +58,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+$sky: rgb(19, 223, 172);
+$purple: rgb(170, 76, 173);
+
 #jumbotron {
     display: flex;
     justify-content: left;
@@ -65,15 +69,24 @@ export default {
     gap: 15px;
     height: 350px;
     padding-top: 20px;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: right, top;
 
     img {
         height: 100%;
         border-radius: 10px;
-        color: rgb(19, 223, 172);
-        box-shadow: 1.5px 2px 0 rgb(19, 223, 172), 3px 4px 0 blue, 4.5px 6px 0 rgb(170, 76, 173);
+        color: $sky;
+        box-shadow: 1.5px 2px 0 $sky, 3px 4px 0 blue, 4.5px 6px 0 $purple;
     }
 
     #description {
+
+        font-size: 1.3em;
+
+        #jumbo-title {
+            font-size: 2em;
+        }
 
         #genre-section {
             display: flex;
@@ -95,7 +108,7 @@ export default {
 
 .smalltitle {
     text-transform: uppercase;
-    color: rgb(19, 223, 172);
-    text-shadow: 1px 1px 0 blue, 2px 1px 0 rgb(170, 76, 173);
+    color: $sky;
+    text-shadow: 1px 1px 0 blue, 2px 1px 0 $purple;
 }
 </style>
